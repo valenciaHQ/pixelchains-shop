@@ -22,6 +22,7 @@ function App() {
     once: false,
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceHandleNextPage = useCallback(debounce(loadMore, 200), []);
 
   useEffect(() => {
@@ -30,7 +31,11 @@ function App() {
 
   if (isMounting) {
     return (
-      <SimpleGrid columns={{ sm: 2, md: 3, lg: 4 }} spacing={10}>
+      <SimpleGrid
+        columns={{ sm: 2, md: 3, lg: 4 }}
+        spacing={10}
+        data-cy="mounting-skeletons-grid"
+      >
         {Array(10).map((_, i) => (
           <CardSkeleton key={i} />
         ))}
@@ -57,7 +62,11 @@ function App() {
         >
           Welcome to Pixelchains Shop
         </Heading>
-        <SimpleGrid columns={{ sm: 2, md: 3, lg: 4 }} spacing={10}>
+        <SimpleGrid
+          columns={{ sm: 2, md: 3, lg: 4 }}
+          spacing={10}
+          data-cy="data-grid"
+        >
           {items.map((item) => (
             <Card data={item} key={item.id} />
           ))}

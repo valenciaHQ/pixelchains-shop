@@ -5,7 +5,9 @@ import CenteredWrapper from "./CenteredWrapper";
 const ErrorFallback = () => (
   <CenteredWrapper>
     <Box bg="tomato">
-      <Text fontSize="3xl">An error ocurred, please try again</Text>
+      <Text as="p" fontSize="3xl">
+        An error ocurred, please try again
+      </Text>
     </Box>
   </CenteredWrapper>
 );
