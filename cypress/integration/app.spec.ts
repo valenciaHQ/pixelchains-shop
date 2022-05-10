@@ -1,7 +1,9 @@
 import mockResponse from "../fixtures/mockResponse.json";
-
+beforeEach(() => {
+  cy.visit("/");
+});
 it("Should show the title", () => {
-  cy.get("h1").contains("Welcome to pixelchains");
+  cy.get("h1").contains("Welcome to Pixelchains Shop");
 });
 
 it("Should show There was an error processing your request where API returns 500", () => {
