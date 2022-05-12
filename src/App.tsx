@@ -7,7 +7,7 @@ import {
   AlertIcon,
   Flex,
 } from "@chakra-ui/react";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import useLoadAssets from "./hooks/useLoadAssets";
 import debounce from "just-debounce-it";
 import useNearScreen from "./hooks/useNearScreen";
@@ -22,12 +22,13 @@ function App() {
     once: false,
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debounceHandleNextPage = useCallback(debounce(loadMore, 200), []);
+  // Fixing warning https://kyleshevlin.com/debounce-and-throttle-callbacks-with-react-hooks
+  const debouncedLoadMore = useMemo(() => debounce(loadMore, 750), [loadMore]);
+  const getNextData = useCallback(debouncedLoadMore, [debouncedLoadMore]);
 
   useEffect(() => {
-    if (isNearScreen) debounceHandleNextPage();
-  }, [debounceHandleNextPage, isNearScreen]);
+    if (isNearScreen) getNextData();
+  }, [getNextData, isNearScreen]);
 
   if (isMounting) {
     return (

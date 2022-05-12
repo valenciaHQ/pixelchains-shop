@@ -15,7 +15,7 @@ const Card: FC<{ data: Nft }> = ({ data }) => {
       />
       <Flex justifyContent="space-between">
         <Text textAlign="center">{name}</Text>
-        {owner.user.username && (
+        {owner?.user?.username && (
           <Flex flexFlow="column" alignItems="center">
             <Text textAlign="right">{`by ${owner.user.username}`}</Text>
             <Avatar src={owner.profile_img_url} />
